@@ -172,11 +172,11 @@ input,select,textarea{font-family:'Nunito',sans-serif;outline:none}
   <div class="lc">
     <div class="ll">Agri<span>Mart</span></div>
     <div class="ls">Admin Panel · Secure Login</div>
-    <div class="lf"><label>Email / Username</label><input type="email" id="lemail" placeholder="admin@agrimart.in" autocomplete="username"></div>
+    <div class="lf"><label>Email / Username</label><input type="email" id="lemail" placeholder="admin@agrimartbd.com" autocomplete="username"></div>
     <div class="lf"><label>Password</label><input type="password" id="lpass" placeholder="••••••••" autocomplete="current-password"></div>
     <button class="lb" onclick="doLogin()">Sign In →</button>
     <div class="le" id="lerr">Incorrect credentials. Try again.</div>
-    <div class="lh">🔑 Default: <strong>admin@agrimart.in</strong> / <strong>admin123</strong><br>Change in Settings after login</div>
+    <div class="lh">🔑 Default: <strong>admin@agrimartbd.com</strong> / <strong>admin123</strong><br>Change in Settings after login</div>
   </div>
 </div>
 
@@ -218,7 +218,7 @@ input,select,textarea{font-family:'Nunito',sans-serif;outline:none}
       <div class="tab on" id="tab-dashboard">
         <div class="sg">
           <div class="sc"><div class="scl">Orders Today</div><div class="scv" id="st-orders">0</div><div class="scs">Total received</div></div>
-          <div class="sc"><div class="scl">Revenue Today</div><div class="scv" id="st-rev">₹0</div><div class="scs">From orders</div></div>
+          <div class="sc"><div class="scl">Revenue Today</div><div class="scv" id="st-rev">Tk 0</div><div class="scs">From orders</div></div>
           <div class="sc"><div class="scl">New Feedback</div><div class="scv" id="st-fb">0</div><div class="scs">Unread messages</div></div>
           <div class="sc"><div class="scl">Total Products</div><div class="scv" id="st-prod">0</div><div class="scs">In your store</div></div>
         </div>
@@ -248,8 +248,8 @@ input,select,textarea{font-family:'Nunito',sans-serif;outline:none}
                 </div>
               </div>
               <div class="fr">
-                <div class="fl"><label>Selling Price ₹ *</label><input id="pp" type="number" placeholder="185"></div>
-                <div class="fl"><label>Original Price ₹</label><input id="po" type="number" placeholder="280"></div>
+                <div class="fl"><label>Selling Price (Tk) *</label><input id="pp" type="number" placeholder="185"></div>
+                <div class="fl"><label>Original Price (Tk)</label><input id="po" type="number" placeholder="280"></div>
               </div>
               <div class="fr">
                 <div class="fl"><label>Emoji Icon</label><input id="pe" placeholder="🍅" maxlength="4"><div class="fh">One emoji for the product</div></div>
@@ -376,7 +376,7 @@ const DB = {
 
 // ========== AUTH ==========
 const getAdminPass = () => localStorage.getItem('am_adminpass') || 'admin123';
-const getAdminEmail = () => localStorage.getItem('am_adminemail') || 'admin@agrimart.in';
+const getAdminEmail = () => localStorage.getItem('am_adminemail') || 'admin@agrimartbd.com';
 
 function doLogin() {
   const e = document.getElementById('lemail').value.trim();
@@ -442,9 +442,9 @@ function toast(msg,type='ok') {
 // ========== UTILS ==========
 function fmtDate(ts) {
   if(!ts) return '—';
-  return new Date(ts).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  return new Date(ts).toLocaleDateString('en-BD',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
 }
-function fmtDay(ts) { return new Date(ts).toLocaleDateString('en-IN',{day:'numeric',month:'short'}); }
+function fmtDay(ts) { return new Date(ts).toLocaleDateString('en-BD',{day:'numeric',month:'short'}); }
 function isToday(ts) { const d=new Date(ts),n=new Date(); return d.getDate()===n.getDate()&&d.getMonth()===n.getMonth()&&d.getFullYear()===n.getFullYear(); }
 
 // ========== DASHBOARD ==========
@@ -462,7 +462,7 @@ function loadDash() {
   const pendingCm = comments.filter(c=>!c.approved).length;
 
   document.getElementById('st-orders').textContent = todayOrders.length;
-  document.getElementById('st-rev').textContent = '₹'+todayRev.toLocaleString('en-IN');
+  document.getElementById('st-rev').textContent = 'Tk '+todayRev.toLocaleString('en-BD');
   document.getElementById('st-fb').textContent = unreadFb;
   document.getElementById('st-prod').textContent = products.length;
 
@@ -481,7 +481,7 @@ function loadDash() {
   if(!orders.length) { oEl.innerHTML='<div class="emp"><div class="empi">🛒</div><div class="empp">No orders yet</div></div>'; }
   else {
     oEl.innerHTML = orders.slice(0,6).map(o=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--bd)">
-      <div><div style="font-weight:700;font-size:12px">${o.name||'—'}</div><div style="font-size:11px;color:var(--ts)">${o.phone||''} · ₹${(o.total||0).toLocaleString('en-IN')}</div></div>
+      <div><div style="font-weight:700;font-size:12px">${o.name||'—'}</div><div style="font-size:11px;color:var(--ts)">${o.phone||''} · Tk ${(o.total||0).toLocaleString('en-BD')}</div></div>
       <span class="bdg b${(o.status||'Pending').toLowerCase().substring(0,2)}">${o.status||'Pending'}</span>
     </div>`).join('');
   }
@@ -510,7 +510,7 @@ function loadProducts() {
       <div class="pii">
         <div class="pin">${p.name}</div>
         <div class="pim">${p.brand} · ${p.category}</div>
-        <div class="pip">₹${p.price} <span style="text-decoration:line-through;color:var(--ts);font-weight:400">₹${p.originalPrice||''}</span>${disc?' <span style="color:var(--r)">'+disc+'% off</span>':''}</div>
+        <div class="pip">Tk ${p.price} <span style="text-decoration:line-through;color:var(--ts);font-weight:400">Tk ${p.originalPrice||''}</span>${disc?' <span style="color:var(--r)">'+disc+'% off</span>':''}</div>
       </div>
       <div class="pia">
         <button class="btn bo bsm" onclick="editProduct('${p.id}')">Edit</button>
@@ -578,7 +578,7 @@ function loadOrders() {
       <td style="font-size:12px">${o.phone||'—'}</td>
       <td style="font-size:11px;color:var(--ts);max-width:130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${o.address||'—'}</td>
       <td style="font-size:12px;text-align:center">${itemCount}</td>
-      <td style="font-weight:700;color:var(--g);font-size:12px">₹${(o.total||0).toLocaleString('en-IN')}</td>
+      <td style="font-weight:700;color:var(--g);font-size:12px">Tk ${(o.total||0).toLocaleString('en-BD')}</td>
       <td style="font-size:11px;color:var(--ts)">${fmtDate(o.ts)}</td>
       <td><span class="bdg b${(o.status||'Pending').toLowerCase().substring(0,2)}">${o.status||'Pending'}</span></td>
       <td><select onchange="updateOrder('${o.id}',this.value)" style="font-size:11px;padding:4px 7px;border-radius:5px;border:1px solid var(--bd)"><option value="">Update</option>${statusOpts}</select></td>
@@ -630,7 +630,7 @@ async function genPost() {
     const res=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
       headers:{'Content-Type':'application/json','x-api-key':AI_KEY,'anthropic-version':'2023-06-01'},
-      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:800,messages:[{role:'user',content:`Write a helpful farming advisory post for Indian farmers about: "${topic}"\nCategory: ${cat}\n\nRespond in exactly this format:\nTITLE: [compelling title here]\nCONTENT: [write 3-4 practical paragraphs with specific actionable advice suitable for Indian farmers. Include specific product recommendations, timing, quantities where relevant. Keep language simple and practical.]\n\nDo not add any other text.`}]})
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:800,messages:[{role:'user',content:`Write a helpful farming advisory post for Bangladeshi farmers about: "${topic}"\nCategory: ${cat}\n\nRespond in exactly this format:\nTITLE: [compelling title here]\nCONTENT: [write 3-4 practical paragraphs with specific actionable advice suitable for Bangladeshi farmers. Include specific product recommendations, timing, quantities where relevant. Keep language simple and practical.]\n\nDo not add any other text.`}]})
     });
     const data=await res.json();
     const text=data.content?.[0]?.text||'';
