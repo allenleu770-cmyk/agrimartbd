@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgriMart — India's Trusted Farm Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--g:#1a6e2e;--gd:#0f4a1e;--gl:#e8f5ec;--au:#f0a500;--aul:#fff8e6;--br:#7a4520;--cr:#f9f6f0;--tx:#1c2b1c;--ts:#4a5e4a;--bd:#dde8dd;--wh:#fff;--r:#d63030}
+body{font-family:'Nunito',sans-serif;color:var(--tx);background:var(--wh)}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;border:none;font-family:'Nunito',sans-serif}
+/* ANN */
+.ann{background:var(--gd);color:#fff;text-align:center;padding:7px 16px;font-size:12.5px}
+.ann span{color:var(--au);font-weight:700}
+/* HEADER */
+header{background:var(--wh);border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.hi{max-width:1280px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:18px}
+.logo{display:flex;align-items:center;gap:9px;min-width:150px;flex-shrink:0}
+.logo-ico{width:36px;height:36px;background:var(--g);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.logo-txt{font-family:'Poppins',sans-serif;font-weight:800;font-size:20px;color:var(--g);line-height:1}
+.logo-txt span{color:var(--au)}
+.logo-sub{font-size:9px;color:var(--ts);font-weight:600;letter-spacing:.5px}
+.sw{flex:1;position:relative;max-width:560px}
+.sw input{width:100%;padding:10px 48px 10px 16px;border:1.5px solid var(--bd);border-radius:24px;font-size:13px;font-family:'Nunito',sans-serif;background:#fafafa;transition:all .2s;outline:none}
+.sw input:focus{border-color:var(--g);box-shadow:0 0 0 3px rgba(26,110,46,.1);background:var(--wh)}
+.sw input::placeholder{color:#9aad9a}
+.sbtn{position:absolute;right:5px;top:50%;transform:translateY(-50%);background:var(--g);border:none;border-radius:20px;padding:5px 14px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;transition:background .2s}
+.sbtn:hover{background:var(--gd)}
+.ha{display:flex;align-items:center;gap:13px;margin-left:auto}
+.ab{display:flex;flex-direction:column;align-items:center;gap:1px;background:none;border:none;cursor:pointer;color:var(--ts);font-size:10px;font-weight:700;padding:4px 7px;border-radius:6px;transition:all .2s}
+.ab:hover{color:var(--g);background:var(--gl)}
+.ab svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.8}
+.cb2{position:relative}
+.cc{position:absolute;top:-4px;right:3px;background:var(--r);color:#fff;font-size:9px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+/* NAV */
+.nav{background:var(--g);border-bottom:2px solid var(--gd)}
+.ni{max-width:1280px;margin:0 auto;padding:0 22px;display:flex;align-items:center;overflow-x:auto;scrollbar-width:none}
+.ni::-webkit-scrollbar{display:none}
+.nitem{color:rgba(255,255,255,.88);font-size:13px;font-weight:600;padding:10px 14px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.nitem:hover,.nitem.on{background:rgba(0,0,0,.15);color:#fff}
+.ndeal{color:var(--au)!important;font-weight:700}
+/* HERO */
+.hero{background:linear-gradient(135deg,#0f4a1e,#1a6e2e 50%,#237a34);padding:0;overflow:hidden;position:relative;min-height:340px;display:flex;align-items:center}
+.hbg{position:absolute;inset:0;overflow:hidden;opacity:.07}
+.hbg svg{width:100%;height:100%}
+.hinner{max-width:1280px;margin:0 auto;padding:36px 22px;display:flex;align-items:center;gap:36px;width:100%;position:relative;z-index:2}
+.htxt{flex:1;min-width:260px}
+.hbadge{display:inline-block;background:var(--au);color:var(--br);font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.5px;margin-bottom:12px;text-transform:uppercase}
+.ht{font-family:'Poppins',sans-serif;font-size:38px;font-weight:800;color:#fff;line-height:1.1;margin-bottom:10px}
+.ht span{color:var(--au)}
+.hs{color:rgba(255,255,255,.8);font-size:14px;line-height:1.6;margin-bottom:20px;max-width:420px}
+.hctas{display:flex;gap:10px;flex-wrap:wrap}
+.btnp{background:var(--au);color:var(--br);font-weight:700;font-size:14px;padding:11px 24px;border-radius:24px;border:none;cursor:pointer;font-family:'Poppins',sans-serif;transition:all .15s;box-shadow:0 4px 14px rgba(240,165,0,.35)}
+.btnp:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(240,165,0,.45)}
+.btns{background:rgba(255,255,255,.15);color:#fff;font-weight:600;font-size:14px;padding:11px 24px;border-radius:24px;border:2px solid rgba(255,255,255,.4);cursor:pointer;transition:all .2s}
+.btns:hover{background:rgba(255,255,255,.25)}
+.hcards{display:flex;flex-direction:column;gap:10px;min-width:280px}
+.hcard{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:13px;padding:14px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .2s}
+.hcard:hover{background:rgba(255,255,255,.2);transform:translateX(4px)}
+.hcico{width:44px;height:44px;border-radius:9px;background:var(--au);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.hct h4{color:#fff;font-weight:700;font-size:13px;margin-bottom:2px}
+.hct p{color:rgba(255,255,255,.7);font-size:11px}
+.hct strong{color:var(--au)}
+/* TRUST */
+.trust{background:var(--aul);border-bottom:1px solid #f0d88a}
+.ti{max-width:1280px;margin:0 auto;padding:12px 22px;display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:10px}
+.titem{display:flex;align-items:center;gap:8px;color:var(--br);font-size:12px;font-weight:600}
+.titem svg{width:18px;height:18px;stroke:var(--br);fill:none;stroke-width:1.8}
+/* SECTIONS */
+.sec{padding:36px 22px;max-width:1280px;margin:0 auto}
+.sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.stitle{font-family:'Poppins',sans-serif;font-size:20px;font-weight:700;position:relative;padding-left:12px}
+.stitle::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:80%;background:var(--g);border-radius:3px}
+.sall{color:var(--g);font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:3px;border:1.5px solid var(--g);padding:5px 13px;border-radius:18px;transition:all .2s}
+.sall:hover{background:var(--g);color:#fff}
+/* CAT GRID */
+.catbg{background:var(--cr)}
+.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px}
+.cc2{background:var(--wh);border-radius:12px;border:1.5px solid var(--bd);padding:14px 8px;text-align:center;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:7px}
+.cc2:hover{border-color:var(--g);transform:translateY(-3px);box-shadow:0 6px 16px rgba(26,110,46,.12)}
+.cico{width:50px;height:50px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto}
+.cn{font-size:11px;font-weight:700;color:var(--tx);line-height:1.3}
+.cct{font-size:10px;color:var(--ts)}
+/* DEALS */
+.dealsbg{background:linear-gradient(135deg,#fff9ee,#fff4d6);border-top:1px solid #f0d88a;border-bottom:1px solid #f0d88a}
+.dtimer{display:flex;align-items:center;gap:7px;margin-bottom:6px}
+.dtl{font-size:11px;color:var(--ts);font-weight:600}
+.dtb{display:flex;gap:4px}
+.dtbox{background:var(--g);color:#fff;font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;padding:3px 7px;border-radius:5px;min-width:30px;text-align:center}
+.dtsep{color:var(--g);font-weight:700;font-size:13px;display:flex;align-items:center}
+/* PRODUCT GRID */
+.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.pc{background:var(--wh);border-radius:13px;border:1.5px solid var(--bd);overflow:hidden;cursor:pointer;transition:all .2s;position:relative}
+.pc:hover{border-color:var(--g);box-shadow:0 6px 20px rgba(26,110,46,.13);transform:translateY(-2px)}
+.pbdg{position:absolute;top:9px;left:9px;z-index:2;background:var(--r);color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:18px}
+.pbdg.new{background:var(--g)}
+.pbdg.hot{background:var(--au);color:var(--br)}
+.piw{height:170px;background:var(--cr);display:flex;align-items:center;justify-content:center;padding:14px;position:relative;overflow:hidden}
+.piw span{font-size:75px;line-height:1;user-select:none}
+.pwish{position:absolute;top:9px;right:9px;width:28px;height:28px;background:rgba(255,255,255,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--bd);cursor:pointer;transition:all .2s;font-size:14px}
+.pwish:hover{background:var(--wh);border-color:var(--r)}
+.pwish.loved{color:var(--r)}
+.pinf{padding:12px}
+.pbrand{font-size:10px;color:var(--g);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+.pname{font-size:13px;font-weight:700;color:var(--tx);margin-bottom:3px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.prat{display:flex;align-items:center;gap:3px;margin-bottom:7px}
+.stars{color:var(--au);font-size:12px;letter-spacing:1px}
+.rcnt{font-size:10px;color:var(--ts)}
+.ppr{display:flex;align-items:baseline;gap:5px;margin-bottom:9px}
+.pnew{font-family:'Poppins',sans-serif;font-size:17px;font-weight:700;color:var(--g)}
+.pold{font-size:12px;color:var(--ts);text-decoration:line-through}
+.poff{font-size:11px;font-weight:700;color:var(--r)}
+.acbtn{width:100%;background:var(--g);color:#fff;font-weight:700;font-size:12px;padding:8px;border-radius:7px;transition:all .2s;font-family:'Nunito',sans-serif}
+.acbtn:hover{background:var(--gd)}
+.acbtn.added{background:var(--au);color:var(--br)}
+/* ADVISORY */
+.advbg{background:var(--gl)}
+.adg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.adc{background:var(--wh);border-radius:13px;overflow:hidden;border:1.5px solid var(--bd);cursor:pointer;transition:all .2s}
+.adc:hover{box-shadow:0 6px 20px rgba(26,110,46,.12);transform:translateY(-2px)}
+.adimg{height:140px;background:var(--cr);display:flex;align-items:center;justify-content:center;font-size:56px;position:relative}
+.adtag{position:absolute;top:9px;left:9px;background:var(--g);color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:18px}
+.adcon{padding:14px}
+.addate{font-size:10px;color:var(--ts);margin-bottom:5px}
+.adtit{font-size:13px;font-weight:700;color:var(--tx);line-height:1.4;margin-bottom:6px}
+.adtxt{font-size:11px;color:var(--ts);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.adread{color:var(--g);font-size:11px;font-weight:700;margin-top:8px;display:inline-block}
+/* TESTIMONIALS */
+.tg{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
+.tc{background:var(--cr);border-radius:13px;padding:20px;border:1.5px solid var(--bd)}
+.tq{font-size:36px;color:var(--g);opacity:.3;font-family:'Poppins',sans-serif;line-height:.8;margin-bottom:8px}
+.ttxt{font-size:13px;color:var(--tx);line-height:1.6;margin-bottom:14px;font-style:italic}
+.tau{display:flex;align-items:center;gap:10px}
+.tav{width:40px;height:40px;border-radius:50%;background:var(--g);color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;flex-shrink:0}
+.tan{font-weight:700;font-size:13px}
+.tal{font-size:11px;color:var(--ts)}
+.tst{color:var(--au);font-size:12px;letter-spacing:1px;margin-top:3px}
+/* FEEDBACK SECTION */
+.fbsec{background:var(--g);padding:50px 22px}
+.fbs-inner{max-width:700px;margin:0 auto;text-align:center}
+.fbs-inner h2{font-family:'Poppins',sans-serif;font-size:24px;font-weight:700;color:#fff;margin-bottom:6px}
+.fbs-inner p{color:rgba(255,255,255,.75);font-size:14px;margin-bottom:28px}
+.fbform{background:rgba(255,255,255,.1);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:24px}
+.fbform .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.fbform input,.fbform textarea,.fbform select{width:100%;padding:10px 14px;border-radius:8px;border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.15);color:#fff;font-size:13px;font-family:'Nunito',sans-serif;outline:none;transition:border-color .2s}
+.fbform input::placeholder,.fbform textarea::placeholder{color:rgba(255,255,255,.5)}
+.fbform input:focus,.fbform textarea:focus{border-color:var(--au)}
+.fbform textarea{resize:vertical;min-height:80px;margin-bottom:14px}
+.stars-rate{display:flex;gap:4px;justify-content:center;margin-bottom:14px}
+.sr{font-size:24px;cursor:pointer;color:rgba(255,255,255,.3);transition:color .2s}
+.sr.on{color:var(--au)}
+.fbsub{background:var(--au);color:var(--br);font-weight:700;font-size:14px;padding:11px 28px;border-radius:24px;font-family:'Poppins',sans-serif;cursor:pointer;transition:all .15s;border:none}
+.fbsub:hover{transform:scale(1.03)}
+/* BRANDS */
+.brbg{background:var(--cr);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)}
+.bg3{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;align-items:center}
+.bpill{background:var(--wh);border:1.5px solid var(--bd);border-radius:9px;padding:10px 20px;font-family:'Poppins',sans-serif;font-weight:700;font-size:12px;color:var(--ts);cursor:pointer;transition:all .2s}
+.bpill:hover{border-color:var(--g);color:var(--g)}
+/* NEWSLETTER */
+.nl{background:var(--gd);padding:46px 22px;text-align:center}
+.nl h2{font-family:'Poppins',sans-serif;font-size:24px;font-weight:700;color:#fff;margin-bottom:6px}
+.nl p{color:rgba(255,255,255,.7);font-size:14px;margin-bottom:22px}
+.nlf{display:flex;gap:10px;max-width:440px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.nlf input{flex:1;min-width:200px;padding:12px 18px;border-radius:24px;border:none;font-size:13px;font-family:'Nunito',sans-serif;outline:none}
+.nlbtn{background:var(--au);color:var(--br);font-weight:700;font-size:13px;padding:12px 24px;border-radius:24px;border:none;cursor:pointer;font-family:'Poppins',sans-serif;transition:transform .15s}
+.nlbtn:hover{transform:scale(1.03)}
+/* FOOTER */
+footer{background:#0d2e0d;color:rgba(255,255,255,.75);padding:44px 22px 20px}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:28px;max-width:1280px;margin:0 auto 32px}
+.flogo{font-family:'Poppins',sans-serif;font-size:22px;font-weight:800;color:#fff}
+.flogo span{color:var(--au)}
+.fdesc{font-size:12px;line-height:1.7;margin:12px 0;color:rgba(255,255,255,.55)}
+.fsoc{display:flex;gap:7px;margin-top:6px}
+.fsb{width:32px;height:32px;border-radius:7px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s;color:rgba(255,255,255,.75);font-size:12px;font-weight:700}
+.fsb:hover{background:var(--g)}
+.fh{font-family:'Poppins',sans-serif;font-weight:700;font-size:13px;color:#fff;margin-bottom:12px;letter-spacing:.3px}
+.fl{list-style:none;display:flex;flex-direction:column;gap:8px}
+.fl a{font-size:12px;color:rgba(255,255,255,.55);cursor:pointer;transition:color .2s}
+.fl a:hover{color:var(--au)}
+.fbot{max-width:1280px;margin:0 auto;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:12px;color:rgba(255,255,255,.35)}
+.pays{display:flex;gap:5px}
+.pay{background:rgba(255,255,255,.1);border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;color:rgba(255,255,255,.6)}
+/* DIVIDER */
+.div{height:7px;background:var(--cr)}
+/* CART PANEL */
+.cov{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;display:none}
+.cov.on{display:block}
+.cpan{position:fixed;right:0;top:0;bottom:0;width:370px;max-width:95vw;background:var(--wh);z-index:201;display:flex;flex-direction:column;box-shadow:-4px 0 20px rgba(0,0,0,.15);transform:translateX(100%);transition:transform .3s}
+.cpan.on{transform:translateX(0)}
+.cph{padding:18px;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center}
+.cph h3{font-family:'Poppins',sans-serif;font-size:17px;font-weight:700}
+.cclose{background:var(--cr);border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:17px;color:var(--ts);transition:background .2s}
+.cclose:hover{background:var(--bd)}
+.cit{flex:1;overflow-y:auto;padding:14px}
+.cemp{text-align:center;padding:36px 16px;color:var(--ts)}
+.cemp p{font-size:14px;font-weight:600;margin-bottom:4px}
+.ci{display:flex;gap:11px;padding:11px 0;border-bottom:1px solid var(--bd)}
+.ciimg{width:56px;height:56px;background:var(--cr);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.ciinfo{flex:1}
+.cin{font-size:12px;font-weight:600;margin-bottom:3px;line-height:1.3}
+.cibr{font-size:10px;color:var(--g);font-weight:700;margin-bottom:5px}
+.ciqrow{display:flex;align-items:center;gap:5px}
+.qb{width:24px;height:24px;border-radius:5px;background:var(--cr);border:1px solid var(--bd);font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.qb:hover{background:var(--gl)}
+.qv{font-size:13px;font-weight:700;min-width:18px;text-align:center}
+.cip{font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;color:var(--g);align-self:center;white-space:nowrap}
+.crem{background:none;border:none;cursor:pointer;color:var(--ts);font-size:15px;align-self:flex-start;margin-top:3px;padding:3px;border-radius:3px;transition:color .15s}
+.crem:hover{color:var(--r)}
+.cfoot{padding:14px 18px;border-top:1px solid var(--bd);background:var(--cr)}
+.ctrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.ctlbl{font-size:13px;color:var(--ts);font-weight:600}
+.ctval{font-family:'Poppins',sans-serif;font-size:19px;font-weight:700;color:var(--g)}
+.cobtn{width:100%;background:var(--g);color:#fff;font-weight:700;font-size:14px;padding:12px;border-radius:9px;font-family:'Poppins',sans-serif;cursor:pointer;transition:all .2s}
+.cobtn:hover{background:var(--gd)}
+/* CHECKOUT MODAL */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:300;display:none;align-items:center;justify-content:center}
+.modal.on{display:flex}
+.mbox{background:#fff;border-radius:18px;padding:28px;max-width:460px;width:92%;box-shadow:0 24px 60px rgba(0,0,0,.25);max-height:90vh;overflow-y:auto}
+.mbox h3{font-family:'Poppins',sans-serif;font-size:18px;font-weight:700;margin-bottom:4px}
+.mbox p{font-size:13px;color:var(--ts);margin-bottom:20px}
+.mf{margin-bottom:13px}
+.mf label{display:block;font-size:12px;font-weight:700;margin-bottom:5px;color:var(--tx)}
+.mf input,.mf select,.mf textarea{width:100%;padding:10px 13px;border:1.5px solid var(--bd);border-radius:8px;font-size:13px;outline:none;transition:border-color .2s;font-family:'Nunito',sans-serif}
+.mf input:focus,.mf select:focus,.mf textarea:focus{border-color:var(--g)}
+.mf textarea{resize:vertical;min-height:70px}
+.mr{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.msum{background:var(--cr);border-radius:9px;padding:14px;margin-bottom:16px;font-size:13px}
+.msum-row{display:flex;justify-content:space-between;margin-bottom:5px}
+.msum-row:last-child{font-weight:700;color:var(--g);font-size:14px;padding-top:8px;border-top:1px solid var(--bd);margin-top:8px;margin-bottom:0}
+.mpbtn{width:100%;background:var(--g);color:#fff;font-weight:700;font-size:14px;padding:12px;border-radius:9px;font-family:'Poppins',sans-serif;cursor:pointer;transition:all .2s;border:none;margin-top:4px}
+.mpbtn:hover{background:var(--gd)}
+.mcbtn{width:100%;background:var(--cr);color:var(--ts);font-weight:600;font-size:13px;padding:10px;border-radius:9px;font-family:'Nunito',sans-serif;cursor:pointer;border:1.5px solid var(--bd);margin-top:8px}
+.mcbtn:hover{background:var(--bd)}
+/* COMMENT MODAL */
+.cm-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:300;display:none;align-items:center;justify-content:center}
+.cm-modal.on{display:flex}
+/* TOAST */
+.toast{position:fixed;bottom:20px;right:20px;background:var(--gd);color:#fff;padding:11px 17px;border-radius:9px;font-size:13px;font-weight:600;z-index:999;transform:translateY(80px);opacity:0;transition:all .3s;max-width:280px;box-shadow:0 4px 16px rgba(0,0,0,.2)}
+.toast.on{transform:translateY(0);opacity:1}
+/* SUCCESS */
+.success-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:400;display:none;align-items:center;justify-content:center}
+.success-modal.on{display:flex}
+.sbox{background:#fff;border-radius:18px;padding:36px 28px;text-align:center;max-width:380px;width:90%}
+.sico{font-size:56px;margin-bottom:12px}
+.sbox h3{font-family:'Poppins',sans-serif;font-size:20px;font-weight:700;margin-bottom:8px;color:var(--g)}
+.sbox p{font-size:14px;color:var(--ts);margin-bottom:20px;line-height:1.6}
+.sdone{background:var(--g);color:#fff;font-weight:700;font-size:14px;padding:12px 28px;border-radius:9px;font-family:'Poppins',sans-serif;cursor:pointer;border:none}
+@media(max-width:768px){
+  .hi{flex-wrap:wrap;gap:10px}.sw{order:3;flex-basis:100%}
+  .hinner{flex-direction:column}.ht{font-size:26px}
+  .hcards{flex-direction:row;flex-wrap:wrap}
+  .cpan{width:100%;max-width:100%}
+  .ni{gap:0}.fbform .frow{grid-template-columns:1fr}.mr{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="ann">🌾 Use code <span>KISAN25</span> for 25% off your first order · Free delivery above ₹499 · Call: <span>1800-120-4567</span></div>
+
+<header>
+  <div class="hi">
+    <a class="logo" href="#">
+      <div class="logo-ico">🌱</div>
+      <div><div class="logo-txt">Agri<span>Mart</span></div><div class="logo-sub">INDIA'S TRUSTED FARM STORE</div></div>
+    </a>
+    <div class="sw">
+      <input type="text" id="srch" placeholder="Search seeds, fertilizers, pesticides, equipment...">
+      <button class="sbtn" onclick="doSearch()">Search</button>
+    </div>
+    <div class="ha">
+      <button class="ab" onclick="toggleCart()">
+        <div class="cb2"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cc" id="cc">0</span></div>
+        Cart
+      </button>
+      <button class="ab" onclick="toast('Sign up feature coming soon!')">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Login
+      </button>
+      <button class="ab" onclick="go('orders')">
+        <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        Orders
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav">
+    <div class="ni">
+      <div class="nitem on" onclick="filterCat('all',this)">🏠 All Products</div>
+      <div class="nitem" onclick="filterCat('seeds',this)">🌱 Seeds</div>
+      <div class="nitem" onclick="filterCat('fertilizers',this)">🌿 Fertilizers</div>
+      <div class="nitem" onclick="filterCat('pesticides',this)">🧪 Pesticides</div>
+      <div class="nitem" onclick="filterCat('equipment',this)">🚜 Equipment</div>
+      <div class="nitem" onclick="filterCat('organics',this)">♻️ Organics</div>
+      <div class="nitem" onclick="filterCat('irrigation',this)">💧 Irrigation</div>
+      <div class="nitem ndeal" onclick="filterCat('deals',this)">🔥 Hot Deals</div>
+      <div class="nitem" onclick="document.getElementById('fbsec').scrollIntoView({behavior:'smooth'})">💬 Give Feedback</div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hbg"><svg viewBox="0 0 1280 340" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><circle cx="200" cy="280" r="160" fill="#fff"/><circle cx="900" cy="70" r="110" fill="#fff"/><circle cx="1150" cy="310" r="180" fill="#fff"/></svg></div>
+  <div class="hinner">
+    <div class="htxt">
+      <div class="hbadge">🌾 Kharif Season Sale — Up to 40% Off</div>
+      <h1 class="ht">Everything Your<br>Farm <span>Needs to Thrive</span></h1>
+      <p class="hs">Premium seeds, fertilizers, pesticides & farm equipment — trusted by 12 lakh+ farmers across India. Free expert advisory with every order.</p>
+      <div class="hctas">
+        <button class="btnp" onclick="document.getElementById('prodgrid').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+        <button class="btns" onclick="document.getElementById('fbsec').scrollIntoView({behavior:'smooth'})">Give Feedback</button>
+      </div>
+    </div>
+    <div class="hcards">
+      <div class="hcard" onclick="filterCat('seeds',null)"><div class="hcico">🌱</div><div class="hct"><h4>Hybrid Seeds</h4><p>Certified varieties · <strong>500+ SKUs</strong></p></div></div>
+      <div class="hcard" onclick="filterCat('fertilizers',null)"><div class="hcico">🌿</div><div class="hct"><h4>Fertilizers</h4><p>Organic & chemical · <strong>300+ products</strong></p></div></div>
+      <div class="hcard" onclick="filterCat('pesticides',null)"><div class="hcico">🧪</div><div class="hct"><h4>Crop Protection</h4><p>Pesticides & bio solutions · <strong>200+ items</strong></p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<div class="trust">
+  <div class="ti">
+    <div class="titem"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Certified Quality</div>
+    <div class="titem"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Free Delivery ₹499+</div>
+    <div class="titem"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>100% Genuine Products</div>
+    <div class="titem"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>12 Lakh+ Farmers</div>
+    <div class="titem"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .82h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>24x7 Support</div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="catbg">
+  <div class="sec">
+    <div class="sh"><div class="stitle">Shop by Category</div></div>
+    <div class="cg">
+      <div class="cc2" onclick="filterCat('seeds',null)"><div class="cico" style="background:#e8f5e9">🌱</div><div class="cn">Vegetable Seeds</div><div class="cct">220+ products</div></div>
+      <div class="cc2" onclick="filterCat('seeds',null)"><div class="cico" style="background:#fff8e1">🌾</div><div class="cn">Crop Seeds</div><div class="cct">180+ products</div></div>
+      <div class="cc2" onclick="filterCat('fertilizers',null)"><div class="cico" style="background:#e8f5e9">🌿</div><div class="cn">Fertilizers</div><div class="cct">150+ products</div></div>
+      <div class="cc2" onclick="filterCat('pesticides',null)"><div class="cico" style="background:#fce4ec">🛡️</div><div class="cn">Pesticides</div><div class="cct">120+ products</div></div>
+      <div class="cc2" onclick="filterCat('organics',null)"><div class="cico" style="background:#f1f8e9">♻️</div><div class="cn">Bio & Organic</div><div class="cct">90+ products</div></div>
+      <div class="cc2" onclick="filterCat('irrigation',null)"><div class="cico" style="background:#e3f2fd">💧</div><div class="cn">Irrigation</div><div class="cct">75+ products</div></div>
+      <div class="cc2" onclick="filterCat('equipment',null)"><div class="cico" style="background:#fbe9e7">🚜</div><div class="cn">Farm Equipment</div><div class="cct">60+ products</div></div>
+      <div class="cc2" onclick="filterCat('all',null)"><div class="cico" style="background:#ede7f6">🌸</div><div class="cn">Flower Seeds</div><div class="cct">50+ products</div></div>
+      <div class="cc2" onclick="filterCat('all',null)"><div class="cico" style="background:#e0f7fa">🍃</div><div class="cn">Plant Nutrition</div><div class="cct">80+ products</div></div>
+      <div class="cc2" onclick="filterCat('all',null)"><div class="cico" style="background:#fff3e0">⚡</div><div class="cn">Growth Promoters</div><div class="cct">40+ products</div></div>
+    </div>
+  </div>
+</div>
+<div class="div"></div>
+
+<!-- DEALS + PRODUCTS -->
+<div class="dealsbg">
+  <div class="sec">
+    <div class="sh">
+      <div>
+        <div class="stitle">Today's Hot Deals</div>
+        <div class="dtimer" style="margin-top:7px">
+          <span class="dtl">Ends in:</span>
+          <div class="dtb"><span class="dtbox" id="th">08</span><span class="dtsep">:</span><span class="dtbox" id="tm">45</span><span class="dtsep">:</span><span class="dtbox" id="ts">30</span></div>
+        </div>
+      </div>
+      <span class="sall" onclick="filterCat('deals',null)">All Deals →</span>
+    </div>
+    <div class="pg" id="prodgrid"></div>
+  </div>
+</div>
+<div class="div"></div>
+
+<!-- ADVISORY -->
+<div class="advbg">
+  <div class="sec">
+    <div class="sh"><div class="stitle">Expert Agri Advisory</div><span class="sall">Read More →</span></div>
+    <div class="adg" id="advisory-grid">
+      <div class="adc"><div class="adimg" style="background:#e8f5e9">🌿<span class="adtag">Pest Control</span></div><div class="adcon"><div class="addate">15 Jun 2026</div><div class="adtit">How to identify and control Fall Armyworm in Maize crops</div><div class="adtxt">Fall Armyworm can cause up to 73% loss in maize yields. Learn integrated management strategies...</div><div class="adread">Read More →</div></div></div>
+      <div class="adc"><div class="adimg" style="background:#fff8e1">🌾<span class="adtag">Crop Guide</span></div><div class="adcon"><div class="addate">12 Jun 2026</div><div class="adtit">Complete guide to Kharif season paddy cultivation 2026</div><div class="adtxt">Get the best yield from your paddy fields this Kharif season with proper nursery management...</div><div class="adread">Read More →</div></div></div>
+      <div class="adc"><div class="adimg" style="background:#fce4ec">🍅<span class="adtag">Vegetable</span></div><div class="adcon"><div class="addate">8 Jun 2026</div><div class="adtit">Tomato leaf curl virus — prevention and treatment tips</div><div class="adtxt">Leaf curl virus transmitted by whiteflies can devastate your tomato crop. Here's an actionable plan...</div><div class="adread">Read More →</div></div></div>
+    </div>
+  </div>
+</div>
+<div class="div"></div>
+
+<!-- TESTIMONIALS -->
+<div>
+  <div class="sec">
+    <div class="sh"><div class="stitle">What Farmers Say</div></div>
+    <div class="tg">
+      <div class="tc"><div class="tq">"</div><div class="ttxt">AgriMart changed how I farm. The hybrid tomato seeds doubled my yield this season. Delivery was fast and the agri expert gave free advice on fertigation!</div><div class="tau"><div class="tav">RS</div><div><div class="tan">Ramesh Shinde</div><div class="tal">Nashik, Maharashtra</div><div class="tst">★★★★★</div></div></div></div>
+      <div class="tc"><div class="tq">"</div><div class="ttxt">Ordered NPK fertilizer and got it in 2 days even in my village. The expert suggested the right dosage for my cotton crop. Yield increased by 35%!</div><div class="tau"><div class="tav" style="background:var(--au);color:#3d1f00">GR</div><div><div class="tan">Gurpreet Rangi</div><div class="tal">Ludhiana, Punjab</div><div class="tst">★★★★★</div></div></div></div>
+      <div class="tc"><div class="tq">"</div><div class="ttxt">Best platform for farmers! Genuine products, affordable prices. The expert chat replied in minutes with a solution for my sugarcane pest problem.</div><div class="tau"><div class="tav" style="background:var(--r)">LK</div><div><div class="tan">Lakshmi Kumari</div><div class="tal">Coimbatore, Tamil Nadu</div><div class="tst">★★★★☆</div></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FEEDBACK SECTION -->
+<div class="fbsec" id="fbsec">
+  <div class="fbs-inner">
+    <h2>Share Your Experience 💬</h2>
+    <p>Your feedback helps us improve and serve India's farmers better. We read every message!</p>
+    <div class="fbform">
+      <div class="frow">
+        <input id="fb-name" placeholder="Your Full Name *">
+        <input id="fb-phone" placeholder="Mobile Number *" type="tel">
+      </div>
+      <div class="frow">
+        <input id="fb-email" placeholder="Email (optional)" type="email">
+        <select id="fb-topic" style="color:#fff"><option value="General">General Feedback</option><option value="Product Quality">Product Quality</option><option value="Delivery">Delivery</option><option value="Advisory">Expert Advisory</option><option value="App/Website">Website</option><option value="Complaint">Complaint</option></select>
+      </div>
+      <textarea id="fb-msg" placeholder="Write your feedback, suggestion, or complaint... *" rows="4"></textarea>
+      <div style="margin-bottom:14px;text-align:center">
+        <div style="color:rgba(255,255,255,.7);font-size:12px;margin-bottom:6px">Rate your experience:</div>
+        <div class="stars-rate" id="starsrate">
+          <span class="sr" onclick="setRating(1)" data-v="1">★</span>
+          <span class="sr" onclick="setRating(2)" data-v="2">★</span>
+          <span class="sr" onclick="setRating(3)" data-v="3">★</span>
+          <span class="sr" onclick="setRating(4)" data-v="4">★</span>
+          <span class="sr" onclick="setRating(5)" data-v="5">★</span>
+        </div>
+      </div>
+      <button class="fbsub" onclick="submitFeedback()">Submit Feedback ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- BRANDS -->
+<div class="brbg"><div class="sec"><div class="sh"><div class="stitle">Trusted Brands</div></div><div class="bg3"><div class="bpill">Bayer</div><div class="bpill">Syngenta</div><div class="bpill">Mahyco</div><div class="bpill">IFFCO</div><div class="bpill">Coromandel</div><div class="bpill">PI Industries</div><div class="bpill">Nuziveedu</div><div class="bpill">BASF</div><div class="bpill">Dhanuka</div><div class="bpill">UPL</div></div></div></div>
+
+<!-- NEWSLETTER -->
+<div class="nl"><h2>🌾 Get Farming Tips & Exclusive Deals</h2><p>Join 5 lakh+ farmers receiving weekly crop advisory, weather alerts, and discount coupons.</p><div class="nlf"><input type="email" id="nli" placeholder="Enter your mobile or email"><button class="nlbtn" onclick="subNl()">Subscribe Free</button></div></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fg">
+    <div><div class="flogo">Agri<span>Mart</span></div><p class="fdesc">India's leading agri-input marketplace empowering farmers with quality products, expert advice, and timely delivery since 2018.</p><div class="fsoc"><div class="fsb">f</div><div class="fsb">▶</div><div class="fsb">𝕏</div><div class="fsb">◎</div></div></div>
+    <div><div class="fh">Quick Links</div><ul class="fl"><li><a>About AgriMart</a></li><li><a>Agri Advisory</a></li><li><a>Talk to Expert</a></li><li><a>Careers</a></li><li><a>Blogs</a></li><li><a>Media Coverage</a></li></ul></div>
+    <div><div class="fh">Customer Support</div><ul class="fl"><li><a>Track Your Order</a></li><li><a>Returns & Refunds</a></li><li><a>Cancellation Policy</a></li><li><a>FAQs</a></li><li><a>Sell on AgriMart</a></li><li><a>Bulk Orders</a></li></ul></div>
+    <div><div class="fh">Contact Us</div><ul class="fl"><li><a>📞 1800-120-4567 (Toll Free)</a></li><li><a>⏰ Mon–Sat, 8am–8pm</a></li><li><a>✉️ support@agrimart.in</a></li><li><a>💬 WhatsApp: 8888-012345</a></li><li><a style="margin-top:8px;display:block">AgriMart Pvt. Ltd.</a></li><li><a>Bengaluru, Karnataka 560001</a></li></ul></div>
+  </div>
+  <div class="fbot"><div>© 2026 AgriMart Pvt. Ltd. · <a style="color:rgba(255,255,255,.4);cursor:pointer">Privacy</a> · <a style="color:rgba(255,255,255,.4);cursor:pointer">Terms</a></div><div class="pays"><span style="font-size:11px;color:rgba(255,255,255,.3);margin-right:3px">Pay via:</span><span class="pay">UPI</span><span class="pay">VISA</span><span class="pay">MC</span><span class="pay">COD</span><span class="pay">EMI</span></div></div>
+</footer>
+
+<!-- CART PANEL -->
+<div class="cov" id="cov" onclick="toggleCart()"></div>
+<div class="cpan" id="cpan">
+  <div class="cph"><h3>Cart (<span id="citc">0</span>)</h3><button class="cclose" onclick="toggleCart()">✕</button></div>
+  <div class="cit" id="citems"></div>
+  <div class="cfoot" id="cfoot" style="display:none">
+    <div class="ctrow"><span class="ctlbl">Total:</span><span class="ctval">₹<span id="ctot">0</span></span></div>
+    <button class="cobtn" onclick="openCheckout()">Proceed to Checkout →</button>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal" id="comodal">
+  <div class="mbox">
+    <h3>Complete Your Order</h3>
+    <p>Fill in your delivery details below</p>
+    <div class="mr">
+      <div class="mf"><label>Full Name *</label><input id="co-name" placeholder="Ramesh Kumar"></div>
+      <div class="mf"><label>Mobile Number *</label><input id="co-phone" type="tel" placeholder="9876543210"></div>
+    </div>
+    <div class="mf"><label>Delivery Address *</label><textarea id="co-addr" placeholder="House No, Street, Village/Town, District, State - PIN Code"></textarea></div>
+    <div class="mr">
+      <div class="mf"><label>Pincode *</label><input id="co-pin" placeholder="560001" type="tel" maxlength="6"></div>
+      <div class="mf"><label>Payment Method</label><select id="co-pay"><option>Cash on Delivery</option><option>UPI</option><option>Credit/Debit Card</option><option>Net Banking</option></select></div>
+    </div>
+    <div class="msum" id="cosum"></div>
+    <button class="mpbtn" onclick="placeOrder()">✓ Place Order</button>
+    <button class="mcbtn" onclick="closeCheckout()">Cancel</button>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="success-modal" id="sucmodal">
+  <div class="sbox">
+    <div class="sico">🎉</div>
+    <h3>Order Placed Successfully!</h3>
+    <p id="sucmsg">Your order has been received. Our team will contact you within 2 hours to confirm delivery.</p>
+    <button class="sdone" onclick="document.getElementById('sucmodal').classList.remove('on')">Continue Shopping</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ====== DATA STORE (shared with admin via localStorage) ======
+const DB = {
+  get: k=>JSON.parse(localStorage.getItem('am_'+k)||'[]'),
+  push: (k,item)=>{const a=DB.get(k);item.id=Date.now().toString(36)+Math.random().toString(36).slice(2,6);item.ts=new Date().toISOString();a.unshift(item);localStorage.setItem('am_'+k,JSON.stringify(a));return item;}
+};
+
+// ====== DEFAULT PRODUCTS (shown if no admin products yet) ======
+const DEFAULT_PRODS=[
+  {id:'d1',name:'Syngenta Avtar Hybrid Tomato Seeds 10g',brand:'Syngenta',category:'seeds',emoji:'🍅',price:185,originalPrice:280,discount:34,rating:4.5,reviews:1240,badge:'Hot Deal'},
+  {id:'d2',name:'IFFCO Nano DAP Liquid Fertilizer 500ml',brand:'IFFCO',category:'fertilizers',emoji:'🌿',price:290,originalPrice:380,discount:24,rating:4.7,reviews:832,badge:'Best Seller'},
+  {id:'d3',name:'Bayer Confidor Imidacloprid 200SL 250ml',brand:'Bayer',category:'pesticides',emoji:'🧴',price:425,originalPrice:550,discount:23,rating:4.4,reviews:567,badge:null},
+  {id:'d4',name:'Mahyco MHB-80 Hybrid Bajra Seeds 1kg',brand:'Mahyco',category:'seeds',emoji:'🌾',price:149,originalPrice:210,discount:29,rating:4.3,reviews:920,badge:'New'},
+  {id:'d5',name:'Coromandel Gromor NPK 12:32:16 50kg',brand:'Coromandel',category:'fertilizers',emoji:'🪣',price:1240,originalPrice:1480,discount:16,rating:4.6,reviews:445,badge:null},
+  {id:'d6',name:'Dhanuka Taqat Fungicide 250g',brand:'Dhanuka',category:'pesticides',emoji:'🧪',price:310,originalPrice:420,discount:26,rating:4.2,reviews:378,badge:'Hot Deal'},
+  {id:'d7',name:'Drip Irrigation Kit for 1 Acre',brand:'Jain Irrigation',category:'irrigation',emoji:'💧',price:3200,originalPrice:4800,discount:33,rating:4.8,reviews:213,badge:'Premium'},
+  {id:'d8',name:'Terracycle Vermicompost Organic 5kg',brand:'Terracycle',category:'organics',emoji:'♻️',price:165,originalPrice:220,discount:25,rating:4.5,reviews:689,badge:'Eco'},
+];
+
+function getProducts(){
+  const adminProds=DB.get('products');
+  if(adminProds.length){
+    return adminProds.map(p=>({...p,discount:p.originalPrice?Math.round((1-p.price/p.originalPrice)*100):0,reviews:p.reviews||0}));
+  }
+  return DEFAULT_PRODS;
+}
+
+// ====== CART ======
+let cart={};
+function renderProds(list){
+  const g=document.getElementById('prodgrid');
+  g.innerHTML='';
+  if(!list.length){g.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:36px;color:var(--ts);font-size:14px">No products found in this category.</div>';return;}
+  list.forEach(p=>{
+    const inCart=cart[p.id]?cart[p.id].qty:0;
+    const div=document.createElement('div');div.className='pc';div.dataset.id=p.id;
+    const bdg=p.badge?`<span class="pbdg${p.badge==='New'?' new':p.badge==='Eco'||p.badge==='Premium'?' hot':''}">${p.badge}</span>`:'';
+    const disc=p.discount||0;
+    const stars='★'.repeat(Math.round(p.rating||4))+'☆'.repeat(5-Math.round(p.rating||4));
+    div.innerHTML=`${bdg}
+      <div class="piw"><span>${p.emoji||'📦'}</span><div class="pwish" onclick="event.stopPropagation();toggleWish(this)">🤍</div></div>
+      <div class="pinf">
+        <div class="pbrand">${p.brand}</div>
+        <div class="pname">${p.name}</div>
+        <div class="prat"><span class="stars">${stars}</span><span class="rcnt">(${(p.reviews||0).toLocaleString('en-IN')})</span></div>
+        <div class="ppr"><span class="pnew">₹${p.price}</span>${p.originalPrice&&p.originalPrice>p.price?`<span class="pold">₹${p.originalPrice}</span><span class="poff">${disc}% off</span>`:''}</div>
+        <button class="acbtn${inCart?' added':''}" onclick="addCart(${JSON.stringify(p.id)})">${inCart?'✓ Added':'Add to Cart'}</button>
+      </div>`;
+    g.appendChild(div);
+  });
+}
+
+function filterCat(cat,el){
+  document.querySelectorAll('.nitem').forEach(n=>n.classList.remove('on'));
+  if(el)el.classList.add('on');
+  const prods=getProducts();
+  const list=cat==='all'||cat==='deals'?prods:prods.filter(p=>p.category===cat);
+  renderProds(list);
+  document.getElementById('prodgrid').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function doSearch(){
+  const q=document.getElementById('srch').value.trim().toLowerCase();
+  if(!q){renderProds(getProducts());return;}
+  const res=getProducts().filter(p=>p.name.toLowerCase().includes(q)||p.brand.toLowerCase().includes(q)||p.category.toLowerCase().includes(q));
+  renderProds(res);
+  document.getElementById('prodgrid').scrollIntoView({behavior:'smooth'});
+  toast(`Found ${res.length} result${res.length!==1?'s':''} for "${q}"`);
+}
+document.getElementById('srch').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
+
+function addCart(id){
+  const p=getProducts().find(x=>x.id===id);
+  if(!p)return;
+  if(cart[id])cart[id].qty++;else cart[id]={...p,qty:1};
+  updateCart();
+  const btn=document.querySelector(`.pc[data-id="${id}"] .acbtn`);
+  if(btn){btn.textContent='✓ Added';btn.classList.add('added');}
+  toast(`${p.name.substring(0,40)}... added to cart!`);
+}
+function removeCart(id){delete cart[id];updateCart();renderCartItems();document.querySelectorAll(`.pc[data-id="${id}"] .acbtn`).forEach(b=>{b.textContent='Add to Cart';b.classList.remove('added');});}
+function chgQty(id,d){if(!cart[id])return;cart[id].qty+=d;if(cart[id].qty<=0){removeCart(id);return;}updateCart();renderCartItems();}
+function updateCart(){
+  const cnt=Object.values(cart).reduce((a,c)=>a+c.qty,0);
+  document.getElementById('cc').textContent=cnt;
+  document.getElementById('citc').textContent=cnt;
+  const tot=Object.values(cart).reduce((a,c)=>a+c.price*c.qty,0);
+  document.getElementById('ctot').textContent=tot.toLocaleString('en-IN');
+}
+function renderCartItems(){
+  const el=document.getElementById('citems');
+  const items=Object.values(cart);
+  const foot=document.getElementById('cfoot');
+  if(!items.length){el.innerHTML='<div class="cemp"><p style="font-size:24px;margin-bottom:8px">🛒</p><p>Your cart is empty</p><p style="font-size:12px;margin-top:4px;color:var(--ts)">Add some products to get started!</p></div>';foot.style.display='none';return;}
+  foot.style.display='block';
+  el.innerHTML=items.map(item=>`<div class="ci">
+    <div class="ciimg">${item.emoji||'📦'}</div>
+    <div class="ciinfo">
+      <div class="cibr">${item.brand}</div>
+      <div class="cin">${item.name.length>50?item.name.substring(0,50)+'...':item.name}</div>
+      <div class="ciqrow"><button class="qb" onclick="chgQty('${item.id}',-1)">−</button><span class="qv">${item.qty}</span><button class="qb" onclick="chgQty('${item.id}',1)">+</button></div>
+    </div>
+    <span class="cip">₹${(item.price*item.qty).toLocaleString('en-IN')}</span>
+    <button class="crem" onclick="removeCart('${item.id}')">✕</button>
+  </div>`).join('');
+}
+function toggleCart(){const p=document.getElementById('cpan'),o=document.getElementById('cov');const open=p.classList.toggle('on');o.classList.toggle('on',open);if(open)renderCartItems();}
+function toggleWish(btn){btn.textContent=btn.textContent==='🤍'?'❤️':'🤍';toast(btn.textContent==='❤️'?'Added to wishlist!':'Removed from wishlist');}
+
+// ====== CHECKOUT ======
+function openCheckout(){
+  const items=Object.values(cart);
+  if(!items.length){toast('Your cart is empty!');return;}
+  const tot=items.reduce((a,c)=>a+c.price*c.qty,0);
+  const del=tot>=499?0:49;
+  document.getElementById('cosum').innerHTML=items.map(i=>`<div class="msum-row"><span>${i.name.substring(0,35)}... ×${i.qty}</span><span>₹${(i.price*i.qty).toLocaleString('en-IN')}</span></div>`).join('')+`<div class="msum-row"><span>Delivery</span><span>${del===0?'FREE':'₹'+del}</span></div><div class="msum-row"><span>Total</span><span>₹${(tot+del).toLocaleString('en-IN')}</span></div>`;
+  toggleCart();
+  document.getElementById('comodal').classList.add('on');
+}
+function closeCheckout(){document.getElementById('comodal').classList.remove('on');}
+function placeOrder(){
+  const name=document.getElementById('co-name').value.trim();
+  const phone=document.getElementById('co-phone').value.trim();
+  const addr=document.getElementById('co-addr').value.trim();
+  const pin=document.getElementById('co-pin').value.trim();
+  if(!name||!phone||!addr||!pin){toast('Please fill all required fields','err');return;}
+  if(!/^\d{10}$/.test(phone)){toast('Enter valid 10-digit mobile number','err');return;}
+  if(!/^\d{6}$/.test(pin)){toast('Enter valid 6-digit pincode','err');return;}
+  const items=Object.values(cart);
+  const tot=items.reduce((a,c)=>a+c.price*c.qty,0);
+  const del=tot>=499?0:49;
+  const order={name,phone,address:addr,pincode:pin,payment:document.getElementById('co-pay').value,items:items.map(i=>({id:i.id,name:i.name,emoji:i.emoji||'📦',price:i.price,qty:i.qty})),total:tot+del,status:'Pending'};
+  DB.push('orders',order);
+  cart={};updateCart();closeCheckout();
+  document.getElementById('sucmsg').textContent=`Order #${order.id.toUpperCase().substring(0,8)} confirmed! ${order.payment==='Cash on Delivery'?'Pay ₹'+(tot+del).toLocaleString('en-IN')+' on delivery.':''} We'll call ${phone} within 2 hours to confirm.`;
+  document.getElementById('sucmodal').classList.add('on');
+  renderProds(getProducts());
+}
+
+// ====== FEEDBACK ======
+let rating=0;
+function setRating(v){
+  rating=v;
+  document.querySelectorAll('.sr').forEach(s=>{s.classList.toggle('on',parseInt(s.dataset.v)<=v);});
+}
+function submitFeedback(){
+  const name=document.getElementById('fb-name').value.trim();
+  const phone=document.getElementById('fb-phone').value.trim();
+  const msg=document.getElementById('fb-msg').value.trim();
+  if(!name||!phone||!msg){toast('Please fill name, phone, and message','err');return;}
+  DB.push('feedback',{name,phone,email:document.getElementById('fb-email').value.trim(),topic:document.getElementById('fb-topic').value,message:msg,rating:rating||5,read:false});
+  ['fb-name','fb-phone','fb-email','fb-msg'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fb-topic').value='General';rating=0;
+  document.querySelectorAll('.sr').forEach(s=>s.classList.remove('on'));
+  toast('Thank you! Your feedback has been submitted 🙏');
+}
+
+// ====== NEWSLETTER ======
+function subNl(){const v=document.getElementById('nli').value.trim();if(!v){toast('Enter email or mobile first');return;}toast('🎉 Subscribed! Welcome to AgriMart!');document.getElementById('nli').value='';}
+
+// ====== TOAST ======
+let tT;function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('on');clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('on'),3000);}
+
+// ====== TIMER ======
+let secs=8*3600+45*60+30;
+function tickTimer(){secs--;if(secs<0)secs=86399;const h=Math.floor(secs/3600),m=Math.floor((secs%3600)/60),s=secs%60;document.getElementById('th').textContent=String(h).padStart(2,'0');document.getElementById('tm').textContent=String(m).padStart(2,'0');document.getElementById('ts').textContent=String(s).padStart(2,'0');}
+
+// ====== ADVISORY FROM ADMIN POSTS ======
+function loadAdvisory(){
+  const posts=DB.get('posts');
+  if(!posts.length)return;
+  const el=document.getElementById('advisory-grid');
+  el.innerHTML=posts.slice(0,3).map(p=>`<div class="adc">
+    <div class="adimg" style="background:var(--gl)">${p.emoji||'🌿'}<span class="adtag">${p.category||'Advisory'}</span></div>
+    <div class="adcon">
+      <div class="addate">${new Date(p.ts).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</div>
+      <div class="adtit">${p.title}</div>
+      <div class="adtxt">${(p.content||'').substring(0,150)}...</div>
+      <div class="adread">Read More →</div>
+    </div>
+  </div>`).join('');
+}
+
+// ====== INIT ======
+renderProds(getProducts());
+loadAdvisory();
+setInterval(tickTimer,1000);
+setInterval(()=>{renderProds(getProducts());loadAdvisory();},30000);
+</script>
+</body>
+</html>

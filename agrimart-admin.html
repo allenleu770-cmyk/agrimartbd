@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgriMart Admin Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--g:#1a6e2e;--gd:#0d2e0d;--gl:#e8f5ec;--au:#f0a500;--r:#d63030;--bd:#dde8dd;--tx:#1c2b1c;--ts:#4a5e4a;--cr:#f9f6f0;--wh:#fff}
+body{font-family:'Nunito',sans-serif;color:var(--tx);background:var(--cr)}
+button{cursor:pointer;font-family:'Nunito',sans-serif;border:none;outline:none}
+input,select,textarea{font-family:'Nunito',sans-serif;outline:none}
+/* LOGIN */
+.lp{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a1f0a,#1a6e2e)}
+.lc{background:#fff;border-radius:20px;padding:38px;width:360px;max-width:92vw;box-shadow:0 24px 60px rgba(0,0,0,.3)}
+.ll{font-family:'Poppins',sans-serif;font-size:26px;font-weight:800;color:var(--g);text-align:center;margin-bottom:4px}
+.ll span{color:var(--au)}
+.ls{text-align:center;font-size:11px;color:var(--ts);margin-bottom:26px;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+.lf{margin-bottom:14px}
+.lf label{display:block;font-size:12px;font-weight:700;margin-bottom:5px;color:var(--tx)}
+.lf input{width:100%;padding:11px 13px;border:1.5px solid var(--bd);border-radius:8px;font-size:14px;transition:border-color .2s}
+.lf input:focus{border-color:var(--g)}
+.lb{width:100%;background:var(--g);color:#fff;font-weight:700;font-size:14px;padding:12px;border-radius:10px;font-family:'Poppins',sans-serif;transition:background .2s;margin-top:4px}
+.lb:hover{background:var(--gd)}
+.le{color:var(--r);font-size:12px;text-align:center;margin-top:8px;display:none}
+.lh{text-align:center;font-size:11px;color:var(--ts);margin-top:14px;background:var(--cr);padding:8px;border-radius:6px}
+/* LAYOUT */
+.al{display:flex;height:100vh;overflow:hidden}
+/* SIDEBAR */
+.sb{width:215px;background:var(--gd);display:flex;flex-direction:column;flex-shrink:0;transition:width .2s}
+.sbl{padding:18px 16px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sbt{font-family:'Poppins',sans-serif;font-size:18px;font-weight:800;color:#fff}
+.sbt span{color:var(--au)}
+.sbs{font-size:10px;color:rgba(255,255,255,.35);margin-top:2px;font-weight:600;letter-spacing:.5px}
+.sbn{flex:1;padding:10px 0;overflow-y:auto}
+.sbs2{font-size:10px;color:rgba(255,255,255,.28);font-weight:700;letter-spacing:1px;padding:10px 14px 4px;text-transform:uppercase}
+.sl{display:flex;align-items:center;gap:9px;padding:10px 14px;color:rgba(255,255,255,.65);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;border-right:3px solid transparent}
+.sl:hover{background:rgba(255,255,255,.07);color:#fff}
+.sl.on{background:rgba(240,165,0,.13);color:var(--au);border-right-color:var(--au)}
+.sl .si{font-size:15px;width:20px;text-align:center;flex-shrink:0}
+.sbdg{background:var(--r);color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:20px;margin-left:auto;display:none}
+.sbf{padding:12px 14px;border-top:1px solid rgba(255,255,255,.08)}
+.sbfu{font-size:11px;color:rgba(255,255,255,.4);margin-bottom:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.slo{display:flex;align-items:center;gap:7px;color:rgba(255,255,255,.4);font-size:12px;font-weight:600;cursor:pointer;background:none;border:none;padding:0;transition:color .2s}
+.slo:hover{color:var(--r)}
+/* MAIN */
+.mn{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.tb{background:#fff;border-bottom:1px solid var(--bd);padding:12px 22px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.tbt{font-family:'Poppins',sans-serif;font-size:16px;font-weight:700}
+.tbd{font-size:12px;color:var(--ts)}
+.ct{flex:1;overflow-y:auto;padding:20px 22px}
+/* TABS */
+.tab{display:none}.tab.on{display:block}
+/* STATS */
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:20px}
+.sc{background:#fff;border:1.5px solid var(--bd);border-radius:12px;padding:16px}
+.scl{font-size:10px;color:var(--ts);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:7px}
+.scv{font-family:'Poppins',sans-serif;font-size:24px;font-weight:700}
+.scs{font-size:11px;color:var(--ts);margin-top:3px}
+/* QUICK ACTIONS */
+.qg{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:20px}
+.qc{background:#fff;border:1.5px solid var(--bd);border-radius:11px;padding:14px;cursor:pointer;text-align:center;transition:all .2s}
+.qc:hover{border-color:var(--g);background:var(--gl);transform:translateY(-2px)}
+.qi{font-size:24px;margin-bottom:5px}
+.ql{font-size:12px;font-weight:700}
+.qs{font-size:10px;color:var(--ts);margin-top:2px}
+/* CARDS */
+.card{background:#fff;border:1.5px solid var(--bd);border-radius:12px;margin-bottom:16px;overflow:hidden}
+.ch{padding:13px 17px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
+.ct2{font-family:'Poppins',sans-serif;font-size:13px;font-weight:700}
+.cb{padding:17px}
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1.8fr;gap:16px;align-items:start}
+.g22{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+/* FORM */
+.fl{margin-bottom:13px}
+.fl label{display:block;font-size:12px;font-weight:700;margin-bottom:5px;color:var(--tx)}
+.fl input,.fl select,.fl textarea{width:100%;padding:9px 12px;border:1.5px solid var(--bd);border-radius:7px;font-size:13px;background:#fff;color:var(--tx);transition:border-color .2s}
+.fl input:focus,.fl select:focus,.fl textarea:focus{border-color:var(--g)}
+.fl textarea{resize:vertical;min-height:80px}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.fh{font-size:10px;color:var(--ts);margin-top:3px}
+/* BUTTONS */
+.btn{padding:8px 15px;border-radius:7px;font-weight:700;font-size:12px;cursor:pointer;transition:all .2s;border:none;font-family:'Nunito',sans-serif;display:inline-flex;align-items:center;gap:4px}
+.bg{background:var(--g);color:#fff}.bg:hover{background:var(--gd)}
+.bau{background:var(--au);color:#7a4520}.bau:hover{background:#d4900a}
+.br{background:#fce4ec;color:var(--r);border:1px solid #f8bbd0}.br:hover{background:var(--r);color:#fff;border-color:var(--r)}
+.bo{background:#fff;color:var(--g);border:1.5px solid var(--g)}.bo:hover{background:var(--gl)}
+.bsm{padding:5px 11px;font-size:11px}
+.brow{display:flex;gap:7px;flex-wrap:wrap;margin-top:6px}
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{background:var(--cr);padding:9px 12px;text-align:left;font-weight:700;color:var(--ts);font-size:11px;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid var(--bd)}
+.tbl td{padding:11px 12px;border-bottom:1px solid var(--bd);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:#fafff9}
+/* BADGES */
+.bdg{display:inline-block;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700}
+.bp{background:#fff8e1;color:#b8860b}
+.bpr{background:#e3f2fd;color:#1565c0}
+.bsh{background:#e8f5e9;color:#2e7d32}
+.bd2{background:#c8e6c9;color:#1b5e20}
+.bc{background:#fce4ec;color:var(--r)}
+.bn{background:#fce4ec;color:var(--r)}
+.bg2{background:#e8f5e9;color:var(--g)}
+/* AI BOX */
+.ai{background:linear-gradient(135deg,#e8f5ec,#f0f9f4);border:1.5px solid var(--bd);border-radius:9px;padding:13px;margin-bottom:13px}
+.ail{font-size:11px;font-weight:700;color:var(--g);margin-bottom:9px;letter-spacing:.3px}
+.spn{display:none;align-items:center;gap:6px;font-size:12px;color:var(--ts);margin-top:8px}
+.spn.on{display:flex}
+.sp{width:14px;height:14px;border:2px solid rgba(26,110,46,.2);border-top-color:var(--g);border-radius:50%;animation:sp .7s linear infinite;flex-shrink:0}
+@keyframes sp{to{transform:rotate(360deg)}}
+/* ITEM CARDS */
+.ic{border:1.5px solid var(--bd);border-radius:9px;padding:13px;margin-bottom:9px;background:#fff}
+.ict{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:5px}
+.icn{font-weight:700;font-size:12px;flex:1;margin-right:8px;line-height:1.4}
+.icm{font-size:11px;color:var(--ts);margin-bottom:7px}
+.icx{font-size:12px;color:var(--tx);line-height:1.5}
+.icf{display:flex;justify-content:space-between;align-items:center;margin-top:9px}
+/* PRODUCT LIST */
+.pli{display:flex;align-items:center;gap:11px;padding:11px 15px;border-bottom:1px solid var(--bd)}
+.pio{width:42px;height:42px;background:var(--cr);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.pii{flex:1;min-width:0}
+.pin{font-weight:700;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pim{font-size:10px;color:var(--g);font-weight:700;margin-top:2px}
+.pip{font-size:11px;font-weight:700;color:var(--tx);margin-top:2px}
+.pia{display:flex;gap:5px;flex-shrink:0}
+/* FEEDBACK */
+.fbc{border:1.5px solid var(--bd);border-radius:9px;padding:13px;margin-bottom:9px;background:#fff;transition:border-color .2s}
+.fbc.unread{border-left:3px solid var(--au)}
+.fbt{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.fbn{font-weight:700;font-size:13px}
+.fbs{color:var(--au);font-size:12px;letter-spacing:1px}
+.fbx{font-size:12px;color:var(--tx);line-height:1.5;margin-bottom:7px}
+.fbb{display:flex;justify-content:space-between;align-items:center}
+/* COMMENTS */
+.cmc{border:1.5px solid var(--bd);border-radius:9px;padding:13px;margin-bottom:9px;background:#fff}
+.cmt{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px}
+.cmn{font-weight:700;font-size:12px}
+.cmp{font-size:10px;color:var(--g);font-weight:700;margin-bottom:5px}
+.cmx{font-size:12px;line-height:1.5;margin-bottom:8px}
+/* EMPTY */
+.emp{text-align:center;padding:32px 16px;color:var(--ts)}
+.empi{font-size:34px;margin-bottom:8px;opacity:.4}
+.empp{font-size:13px;font-weight:600;margin-bottom:3px}
+.emps{font-size:11px}
+/* TOAST */
+.toast{position:fixed;bottom:20px;right:20px;padding:11px 17px;border-radius:9px;font-size:13px;font-weight:600;z-index:9999;transform:translateY(80px);opacity:0;transition:all .3s;max-width:280px;background:var(--gd);color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.2)}
+.toast.on{transform:translateY(0);opacity:1}
+.toast.err{background:var(--r)}
+/* SCROLLABLE */
+.sl2{max-height:460px;overflow-y:auto}
+/* POST CARD */
+.poc{border:1.5px solid var(--bd);border-radius:9px;padding:13px;margin-bottom:9px}
+.pot{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.pon{font-weight:700;font-size:12px;line-height:1.4;flex:1}
+.pom{font-size:11px;color:var(--ts);margin-bottom:7px}
+.pox{font-size:12px;color:var(--tx);line-height:1.5}
+@media(max-width:900px){
+  .sg{grid-template-columns:1fr 1fr}
+  .qg{grid-template-columns:1fr 1fr}
+  .g2{grid-template-columns:1fr}
+  .sb{width:52px}
+  .sbt,.sbs,.sbs2,.sl span,.sbfu,.slo span{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ========== LOGIN ========== -->
+<div class="lp" id="lp">
+  <div class="lc">
+    <div class="ll">Agri<span>Mart</span></div>
+    <div class="ls">Admin Panel · Secure Login</div>
+    <div class="lf"><label>Email / Username</label><input type="email" id="lemail" placeholder="admin@agrimart.in" autocomplete="username"></div>
+    <div class="lf"><label>Password</label><input type="password" id="lpass" placeholder="••••••••" autocomplete="current-password"></div>
+    <button class="lb" onclick="doLogin()">Sign In →</button>
+    <div class="le" id="lerr">Incorrect credentials. Try again.</div>
+    <div class="lh">🔑 Default: <strong>admin@agrimart.in</strong> / <strong>admin123</strong><br>Change in Settings after login</div>
+  </div>
+</div>
+
+<!-- ========== ADMIN PANEL ========== -->
+<div class="al" id="ap" style="display:none">
+
+  <!-- SIDEBAR -->
+  <aside class="sb">
+    <div class="sbl">
+      <div class="sbt">Agri<span>Mart</span></div>
+      <div class="sbs">Admin Dashboard</div>
+    </div>
+    <nav class="sbn">
+      <div class="sbs2">Main</div>
+      <div class="sl on" onclick="go('dashboard',this)"><span class="si">🏠</span><span>Dashboard</span></div>
+      <div class="sl" onclick="go('products',this)"><span class="si">📦</span><span>Products</span><span class="sbdg" id="bdg-products">0</span></div>
+      <div class="sbs2">Sales</div>
+      <div class="sl" onclick="go('orders',this)"><span class="si">🛒</span><span>Orders</span><span class="sbdg" id="bdg-orders">0</span></div>
+      <div class="sl" onclick="go('feedback',this)"><span class="si">💬</span><span>Feedback</span><span class="sbdg" id="bdg-feedback">0</span></div>
+      <div class="sbs2">Content</div>
+      <div class="sl" onclick="go('posts',this)"><span class="si">✍️</span><span>Daily Posts</span></div>
+      <div class="sl" onclick="go('comments',this)"><span class="si">🗨️</span><span>Comments</span><span class="sbdg" id="bdg-comments">0</span></div>
+    </nav>
+    <div class="sbf">
+      <div class="sbfu" id="sbuser"></div>
+      <button class="slo" onclick="doLogout()"><span>⏻</span><span>Sign Out</span></button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="mn">
+    <div class="tb">
+      <div class="tbt" id="tbtitle">Dashboard</div>
+      <div class="tbd" id="tbdate"></div>
+    </div>
+    <div class="ct" id="ct">
+
+      <!-- ===== DASHBOARD ===== -->
+      <div class="tab on" id="tab-dashboard">
+        <div class="sg">
+          <div class="sc"><div class="scl">Orders Today</div><div class="scv" id="st-orders">0</div><div class="scs">Total received</div></div>
+          <div class="sc"><div class="scl">Revenue Today</div><div class="scv" id="st-rev">₹0</div><div class="scs">From orders</div></div>
+          <div class="sc"><div class="scl">New Feedback</div><div class="scv" id="st-fb">0</div><div class="scs">Unread messages</div></div>
+          <div class="sc"><div class="scl">Total Products</div><div class="scv" id="st-prod">0</div><div class="scs">In your store</div></div>
+        </div>
+        <div class="qg">
+          <div class="qc" onclick="go('products',null)"><div class="qi">➕</div><div class="ql">Add Product</div><div class="qs">List new item</div></div>
+          <div class="qc" onclick="go('orders',null)"><div class="qi">📦</div><div class="ql">View Orders</div><div class="qs">Manage deliveries</div></div>
+          <div class="qc" onclick="go('posts',null)"><div class="qi">✍️</div><div class="ql">Write Post</div><div class="qs">Today's advisory</div></div>
+          <div class="qc" onclick="go('feedback',null)"><div class="qi">💬</div><div class="ql">Read Feedback</div><div class="qs">Farmer responses</div></div>
+        </div>
+        <div class="g22">
+          <div class="card"><div class="ch"><span class="ct2">Recent Orders</span></div><div class="cb" id="dash-orders"><div class="emp"><div class="empi">🛒</div><div class="empp">No orders yet</div><div class="emps">Orders appear here automatically</div></div></div></div>
+          <div class="card"><div class="ch"><span class="ct2">Recent Feedback</span></div><div class="cb" id="dash-fb"><div class="emp"><div class="empi">💬</div><div class="empp">No feedback yet</div><div class="emps">Customer messages appear here</div></div></div></div>
+        </div>
+      </div>
+
+      <!-- ===== PRODUCTS ===== -->
+      <div class="tab" id="tab-products">
+        <div class="g2">
+          <div class="card">
+            <div class="ch"><span class="ct2" id="pform-title">Add New Product</span></div>
+            <div class="cb">
+              <div class="fl"><label>Product Name *</label><input id="pn" placeholder="e.g. Hybrid Tomato Seeds 10g"></div>
+              <div class="fr">
+                <div class="fl"><label>Brand *</label><input id="pb" placeholder="e.g. Syngenta"></div>
+                <div class="fl"><label>Category *</label>
+                  <select id="pc"><option value="">Choose...</option><option value="seeds">Seeds</option><option value="fertilizers">Fertilizers</option><option value="pesticides">Pesticides</option><option value="equipment">Equipment</option><option value="organics">Organics</option><option value="irrigation">Irrigation</option></select>
+                </div>
+              </div>
+              <div class="fr">
+                <div class="fl"><label>Selling Price ₹ *</label><input id="pp" type="number" placeholder="185"></div>
+                <div class="fl"><label>Original Price ₹</label><input id="po" type="number" placeholder="280"></div>
+              </div>
+              <div class="fr">
+                <div class="fl"><label>Emoji Icon</label><input id="pe" placeholder="🍅" maxlength="4"><div class="fh">One emoji for the product</div></div>
+                <div class="fl"><label>Stock Qty</label><input id="ps" type="number" placeholder="50"></div>
+              </div>
+              <div class="fr">
+                <div class="fl"><label>Rating (1-5)</label><input id="pr" type="number" placeholder="4.5" min="1" max="5" step="0.1"></div>
+                <div class="fl"><label>Reviews Count</label><input id="prv" type="number" placeholder="120"></div>
+              </div>
+              <div class="fl"><label>Badge</label>
+                <select id="pbd"><option value="">None</option><option>Hot Deal</option><option>Best Seller</option><option>New</option><option>Eco</option><option>Premium</option></select>
+              </div>
+              <div class="fl"><label>Description</label><textarea id="pdesc" placeholder="Brief product description..."></textarea></div>
+              <div class="brow">
+                <button class="btn bg" onclick="saveProduct()" id="psavebtn">Add Product</button>
+                <button class="btn bo" onclick="clearPForm()">Clear</button>
+              </div>
+              <input type="hidden" id="pid">
+            </div>
+          </div>
+          <div class="card">
+            <div class="ch"><span class="ct2">Products (<span id="pcnt">0</span>)</span><button class="btn bo bsm" onclick="loadProducts()">↻ Refresh</button></div>
+            <div class="sl2" id="plist"><div class="emp" style="padding:24px"><div class="empi">📦</div><div class="empp">No products</div><div class="emps">Add your first product</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== ORDERS ===== -->
+      <div class="tab" id="tab-orders">
+        <div class="card">
+          <div class="ch"><span class="ct2">All Orders</span><button class="btn bo bsm" onclick="loadOrders()">↻ Refresh</button></div>
+          <div style="overflow-x:auto">
+            <table class="tbl">
+              <thead><tr><th>Order #</th><th>Customer</th><th>Phone</th><th>Address</th><th>Items</th><th>Total</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody id="otbody"><tr><td colspan="9" style="text-align:center;padding:30px;color:var(--ts)">No orders yet. They appear here when customers checkout.</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== FEEDBACK ===== -->
+      <div class="tab" id="tab-feedback">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <div style="font-size:13px;color:var(--ts)">Customer feedback submitted on your website</div>
+          <button class="btn bo bsm" onclick="loadFeedback()">↻ Refresh</button>
+        </div>
+        <div id="fblist"><div class="emp"><div class="empi">💬</div><div class="empp">No feedback yet</div><div class="emps">Feedback from website appears here</div></div></div>
+      </div>
+
+      <!-- ===== POSTS ===== -->
+      <div class="tab" id="tab-posts">
+        <div class="g2">
+          <div class="card">
+            <div class="ch"><span class="ct2">Create Advisory Post</span></div>
+            <div class="cb">
+              <div class="ai">
+                <div class="ail">✨ AI Generator (Anthropic)</div>
+                <div class="fl"><label>Topic for AI</label><input id="aitopic" placeholder="e.g. Control aphids in cotton crop"></div>
+                <div class="fl"><label>Category</label>
+                  <select id="aicat"><option>Pest Control</option><option>Crop Guide</option><option>Fertilizer Tips</option><option>Weather Advisory</option><option>Soil Health</option><option>Product Promotion</option></select>
+                </div>
+                <button class="btn bg bsm" onclick="genPost()">✨ Generate with AI</button>
+                <div class="spn" id="aisp"><div class="sp"></div>Generating advisory content...</div>
+              </div>
+              <div class="fl"><label>Post Title *</label><input id="ptitle" placeholder="Clear, helpful title..."></div>
+              <div class="fl"><label>Category</label>
+                <select id="pcat"><option>Pest Control</option><option>Crop Guide</option><option>Fertilizer Tips</option><option>Weather Advisory</option><option>Soil Health</option><option>Product Promotion</option></select>
+              </div>
+              <div class="fl"><label>Content *</label><textarea id="pcontent" rows="8" placeholder="Write your post content here, or use AI above..."></textarea></div>
+              <div class="fl"><label>Emoji</label><input id="pemo" placeholder="🌿" maxlength="4"></div>
+              <div class="brow">
+                <button class="btn bg" onclick="publishPost()">📢 Publish Post</button>
+                <button class="btn bo" onclick="clearPPost()">Clear</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="ch"><span class="ct2">Published Posts (<span id="postcnt">0</span>)</span><button class="btn bo bsm" onclick="loadPosts()">↻ Refresh</button></div>
+            <div class="sl2" id="postslist"><div class="emp" style="padding:24px"><div class="empi">✍️</div><div class="empp">No posts yet</div><div class="emps">Create your first advisory post</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== COMMENTS ===== -->
+      <div class="tab" id="tab-comments">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <div style="font-size:13px;color:var(--ts)">Moderate product comments from your website</div>
+          <button class="btn bo bsm" onclick="loadComments()">↻ Refresh</button>
+        </div>
+        <div id="cmlist"><div class="emp"><div class="empi">🗨️</div><div class="empp">No comments yet</div><div class="emps">Product comments appear here for moderation</div></div></div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ========== ANTHROPIC API KEY ==========
+// Get free at: https://console.anthropic.com
+const AI_KEY = 'YOUR_ANTHROPIC_API_KEY';
+
+// ========== DATA STORE (localStorage) ==========
+const DB = {
+  get: k => JSON.parse(localStorage.getItem('am_'+k) || '[]'),
+  set: (k,v) => localStorage.setItem('am_'+k, JSON.stringify(v)),
+  push: (k,item) => {
+    const a = DB.get(k);
+    item.id = Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+    item.ts = new Date().toISOString();
+    a.unshift(item);
+    DB.set(k,a);
+    return item;
+  },
+  update: (k,id,upd) => {
+    const a = DB.get(k);
+    const i = a.findIndex(x=>x.id===id);
+    if(i!==-1){a[i]={...a[i],...upd,updated:new Date().toISOString()};DB.set(k,a);}
+  },
+  del: (k,id) => DB.set(k, DB.get(k).filter(x=>x.id!==id)),
+  find: (k,id) => DB.get(k).find(x=>x.id===id),
+};
+
+// ========== AUTH ==========
+const getAdminPass = () => localStorage.getItem('am_adminpass') || 'admin123';
+const getAdminEmail = () => localStorage.getItem('am_adminemail') || 'admin@agrimart.in';
+
+function doLogin() {
+  const e = document.getElementById('lemail').value.trim();
+  const p = document.getElementById('lpass').value;
+  const err = document.getElementById('lerr');
+  if(e===getAdminEmail() && p===getAdminPass()) {
+    localStorage.setItem('am_session','1');
+    document.getElementById('lp').style.display='none';
+    document.getElementById('ap').style.display='flex';
+    document.getElementById('sbuser').textContent = e;
+    document.getElementById('tbdate').textContent = fmtDate(new Date().toISOString());
+    loadDash();
+  } else {
+    err.style.display='block';
+    setTimeout(()=>err.style.display='none',3000);
+  }
+}
+document.getElementById('lpass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+
+function doLogout() {
+  localStorage.removeItem('am_session');
+  document.getElementById('ap').style.display='none';
+  document.getElementById('lp').style.display='flex';
+  document.getElementById('lpass').value='';
+}
+
+window.onload = () => {
+  if(localStorage.getItem('am_session')==='1') {
+    document.getElementById('lp').style.display='none';
+    document.getElementById('ap').style.display='flex';
+    document.getElementById('sbuser').textContent = getAdminEmail();
+    document.getElementById('tbdate').textContent = fmtDate(new Date().toISOString());
+    loadDash();
+  }
+};
+
+// ========== NAVIGATION ==========
+const TITLES = {dashboard:'Dashboard',products:'Products',orders:'Orders',feedback:'Customer Feedback',posts:'Daily Posts & Advisory',comments:'Comments'};
+function go(name, el) {
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.sl').forEach(s=>s.classList.remove('on'));
+  document.getElementById('tab-'+name).classList.add('on');
+  if(el) el.classList.add('on');
+  else { const found = [...document.querySelectorAll('.sl')].find(s=>s.getAttribute('onclick')?.includes("'"+name+"'")); if(found) found.classList.add('on'); }
+  document.getElementById('tbtitle').textContent = TITLES[name]||name;
+  if(name==='orders') loadOrders();
+  if(name==='feedback') loadFeedback();
+  if(name==='posts') loadPosts();
+  if(name==='comments') loadComments();
+  if(name==='products') loadProducts();
+}
+
+// ========== TOAST ==========
+let tT;
+function toast(msg,type='ok') {
+  const t=document.getElementById('toast');
+  t.textContent=(type==='ok'?'✓ ':'✗ ')+msg;
+  t.className='toast on'+(type==='err'?' err':'');
+  clearTimeout(tT);
+  tT=setTimeout(()=>t.classList.remove('on'),3200);
+}
+
+// ========== UTILS ==========
+function fmtDate(ts) {
+  if(!ts) return '—';
+  return new Date(ts).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+}
+function fmtDay(ts) { return new Date(ts).toLocaleDateString('en-IN',{day:'numeric',month:'short'}); }
+function isToday(ts) { const d=new Date(ts),n=new Date(); return d.getDate()===n.getDate()&&d.getMonth()===n.getMonth()&&d.getFullYear()===n.getFullYear(); }
+
+// ========== DASHBOARD ==========
+function loadDash() {
+  const orders = DB.get('orders');
+  const feedback = DB.get('feedback');
+  const products = DB.get('products');
+  const posts = DB.get('posts');
+  const comments = DB.get('comments');
+
+  const todayOrders = orders.filter(o=>isToday(o.ts));
+  const todayRev = todayOrders.reduce((a,o)=>a+(o.total||0),0);
+  const unreadFb = feedback.filter(f=>!f.read).length;
+  const pendingOrders = orders.filter(o=>o.status==='Pending').length;
+  const pendingCm = comments.filter(c=>!c.approved).length;
+
+  document.getElementById('st-orders').textContent = todayOrders.length;
+  document.getElementById('st-rev').textContent = '₹'+todayRev.toLocaleString('en-IN');
+  document.getElementById('st-fb').textContent = unreadFb;
+  document.getElementById('st-prod').textContent = products.length;
+
+  // Badges
+  ['orders','feedback','comments'].forEach(k=>{
+    const b = document.getElementById('bdg-'+k);
+    const counts = {orders:pendingOrders,feedback:unreadFb,comments:pendingCm};
+    const c = counts[k];
+    b.textContent=c; b.style.display=c>0?'inline-block':'none';
+  });
+  document.getElementById('bdg-products').textContent = products.length;
+  document.getElementById('bdg-products').style.display = products.length>0?'inline-block':'none';
+
+  // Recent orders
+  const oEl = document.getElementById('dash-orders');
+  if(!orders.length) { oEl.innerHTML='<div class="emp"><div class="empi">🛒</div><div class="empp">No orders yet</div></div>'; }
+  else {
+    oEl.innerHTML = orders.slice(0,6).map(o=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--bd)">
+      <div><div style="font-weight:700;font-size:12px">${o.name||'—'}</div><div style="font-size:11px;color:var(--ts)">${o.phone||''} · ₹${(o.total||0).toLocaleString('en-IN')}</div></div>
+      <span class="bdg b${(o.status||'Pending').toLowerCase().substring(0,2)}">${o.status||'Pending'}</span>
+    </div>`).join('');
+  }
+  // Recent feedback
+  const fEl = document.getElementById('dash-fb');
+  if(!feedback.length) { fEl.innerHTML='<div class="emp"><div class="empi">💬</div><div class="empp">No feedback yet</div></div>'; }
+  else {
+    fEl.innerHTML = feedback.slice(0,6).map(f=>`<div style="padding:9px 0;border-bottom:1px solid var(--bd)${!f.read?';border-left:3px solid var(--au);padding-left:8px':''}">
+      <div style="display:flex;justify-content:space-between"><span style="font-weight:700;font-size:12px">${f.name||'Anonymous'}</span><span style="font-size:11px;color:var(--ts)">${fmtDay(f.ts)}</span></div>
+      <div style="font-size:11px;color:var(--ts);margin-top:2px">${(f.message||'').substring(0,80)}${(f.message||'').length>80?'...':''}</div>
+    </div>`).join('');
+  }
+}
+
+// ========== PRODUCTS ==========
+let editPId = null;
+function loadProducts() {
+  const prods = DB.get('products');
+  document.getElementById('pcnt').textContent = prods.length;
+  const el = document.getElementById('plist');
+  if(!prods.length) { el.innerHTML='<div class="emp" style="padding:24px"><div class="empi">📦</div><div class="empp">No products</div><div class="emps">Add your first product above</div></div>'; return; }
+  el.innerHTML = prods.map(p=>{
+    const disc = p.originalPrice?Math.round((1-p.price/p.originalPrice)*100):0;
+    return `<div class="pli">
+      <div class="pio">${p.emoji||'📦'}</div>
+      <div class="pii">
+        <div class="pin">${p.name}</div>
+        <div class="pim">${p.brand} · ${p.category}</div>
+        <div class="pip">₹${p.price} <span style="text-decoration:line-through;color:var(--ts);font-weight:400">₹${p.originalPrice||''}</span>${disc?' <span style="color:var(--r)">'+disc+'% off</span>':''}</div>
+      </div>
+      <div class="pia">
+        <button class="btn bo bsm" onclick="editProduct('${p.id}')">Edit</button>
+        <button class="btn br bsm" onclick="delProduct('${p.id}')">Del</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function saveProduct() {
+  const name=document.getElementById('pn').value.trim();
+  const brand=document.getElementById('pb').value.trim();
+  const cat=document.getElementById('pc').value;
+  const price=parseFloat(document.getElementById('pp').value);
+  if(!name||!brand||!cat||!price){toast('Fill in required fields: Name, Brand, Category, Price','err');return;}
+  const data={name,brand,category:cat,price,originalPrice:parseFloat(document.getElementById('po').value)||price,emoji:document.getElementById('pe').value||'📦',stock:parseInt(document.getElementById('ps').value)||0,rating:parseFloat(document.getElementById('pr').value)||4.0,reviews:parseInt(document.getElementById('prv').value)||0,badge:document.getElementById('pbd').value||null,description:document.getElementById('pdesc').value.trim()};
+  if(editPId){
+    DB.update('products',editPId,data);
+    toast('Product updated!');
+    editPId=null;
+    document.getElementById('psavebtn').textContent='Add Product';
+    document.getElementById('pform-title').textContent='Add New Product';
+  } else {
+    DB.push('products',data);
+    toast('Product added successfully!');
+  }
+  clearPForm();loadProducts();loadDash();
+}
+
+function editProduct(id) {
+  const p=DB.find('products',id);
+  if(!p)return;
+  document.getElementById('pn').value=p.name||'';document.getElementById('pb').value=p.brand||'';document.getElementById('pc').value=p.category||'';document.getElementById('pp').value=p.price||'';document.getElementById('po').value=p.originalPrice||'';document.getElementById('pe').value=p.emoji||'';document.getElementById('ps').value=p.stock||'';document.getElementById('pr').value=p.rating||'';document.getElementById('prv').value=p.reviews||'';document.getElementById('pbd').value=p.badge||'';document.getElementById('pdesc').value=p.description||'';
+  editPId=id;
+  document.getElementById('psavebtn').textContent='Update Product';
+  document.getElementById('pform-title').textContent='Edit Product';
+  go('products',null);
+  document.getElementById('pn').scrollIntoView({behavior:'smooth'});
+}
+
+function delProduct(id) {
+  if(!confirm('Delete this product?'))return;
+  DB.del('products',id);toast('Product deleted');loadProducts();loadDash();
+}
+
+function clearPForm() {
+  ['pn','pb','pp','po','pe','ps','pr','prv','pdesc'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('pc').value='';document.getElementById('pbd').value='';
+  editPId=null;
+  document.getElementById('psavebtn').textContent='Add Product';
+  document.getElementById('pform-title').textContent='Add New Product';
+}
+
+// ========== ORDERS ==========
+function loadOrders() {
+  const orders=DB.get('orders');
+  const tb=document.getElementById('otbody');
+  if(!orders.length){tb.innerHTML='<tr><td colspan="9" style="text-align:center;padding:30px;color:var(--ts)">No orders yet. They appear here when customers checkout on your website.</td></tr>';return;}
+  const statusOpts=['Pending','Processing','Shipped','Delivered','Cancelled'].map(s=>`<option>${s}</option>`).join('');
+  tb.innerHTML=orders.map(o=>{
+    const itemCount=(o.items||[]).reduce((a,i)=>a+(i.qty||1),0);
+    return `<tr>
+      <td style="font-family:monospace;font-size:11px">#${o.id.toUpperCase().substring(0,8)}</td>
+      <td><div style="font-weight:700;font-size:12px">${o.name||'—'}</div></td>
+      <td style="font-size:12px">${o.phone||'—'}</td>
+      <td style="font-size:11px;color:var(--ts);max-width:130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${o.address||'—'}</td>
+      <td style="font-size:12px;text-align:center">${itemCount}</td>
+      <td style="font-weight:700;color:var(--g);font-size:12px">₹${(o.total||0).toLocaleString('en-IN')}</td>
+      <td style="font-size:11px;color:var(--ts)">${fmtDate(o.ts)}</td>
+      <td><span class="bdg b${(o.status||'Pending').toLowerCase().substring(0,2)}">${o.status||'Pending'}</span></td>
+      <td><select onchange="updateOrder('${o.id}',this.value)" style="font-size:11px;padding:4px 7px;border-radius:5px;border:1px solid var(--bd)"><option value="">Update</option>${statusOpts}</select></td>
+    </tr>`;
+  }).join('');
+}
+function updateOrder(id,status){if(!status)return;DB.update('orders',id,{status});toast('Order updated: '+status);loadOrders();loadDash();}
+
+// ========== FEEDBACK ==========
+function loadFeedback() {
+  const fbs=DB.get('feedback');
+  const el=document.getElementById('fblist');
+  if(!fbs.length){el.innerHTML='<div class="emp"><div class="empi">💬</div><div class="empp">No feedback yet</div><div class="emps">Customer feedback from website appears here</div></div>';return;}
+  el.innerHTML=fbs.map(f=>{
+    const stars='★'.repeat(Math.min(5,Math.round(f.rating||5)))+'☆'.repeat(Math.max(0,5-Math.round(f.rating||5)));
+    return `<div class="fbc${!f.read?' unread':''}">
+      <div class="fbt"><span class="fbn">${f.name||'Anonymous'}${!f.read?' <span class="bdg bn" style="font-size:9px">NEW</span>':''}</span><span class="fbs">${stars}</span></div>
+      <div style="font-size:11px;color:var(--ts);margin-bottom:6px">${f.email||''} ${f.phone?'· '+f.phone:''} · ${fmtDate(f.ts)}</div>
+      <div class="fbx">${f.message||''}</div>
+      <div class="fbb">
+        <div style="display:flex;gap:6px">
+          ${!f.read?`<button class="btn bo bsm" onclick="markFbRead('${f.id}')">Mark Read</button>`:''}
+          <button class="btn br bsm" onclick="delFb('${f.id}')">Delete</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  const unread=fbs.filter(f=>!f.read).length;
+  const b=document.getElementById('bdg-feedback');
+  b.textContent=unread;b.style.display=unread>0?'inline-block':'none';
+}
+function markFbRead(id){DB.update('feedback',id,{read:true});toast('Marked as read');loadFeedback();loadDash();}
+function delFb(id){if(!confirm('Delete this feedback?'))return;DB.del('feedback',id);toast('Deleted');loadFeedback();loadDash();}
+
+// ========== POSTS ==========
+async function genPost() {
+  const topic=document.getElementById('aitopic').value.trim();
+  const cat=document.getElementById('aicat').value;
+  if(!topic){toast('Enter a topic first','err');return;}
+  if(AI_KEY==='YOUR_ANTHROPIC_API_KEY'){
+    toast('Add your Anthropic API key in the script to use AI generation','err');
+    document.getElementById('ptitle').value='How to '+topic;
+    document.getElementById('pcontent').value='Write your advisory content here about: '+topic+'\n\n(Add your Anthropic API key to enable auto-generation)';
+    document.getElementById('pcat').value=cat;
+    return;
+  }
+  document.getElementById('aisp').classList.add('on');
+  try {
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':AI_KEY,'anthropic-version':'2023-06-01'},
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:800,messages:[{role:'user',content:`Write a helpful farming advisory post for Indian farmers about: "${topic}"\nCategory: ${cat}\n\nRespond in exactly this format:\nTITLE: [compelling title here]\nCONTENT: [write 3-4 practical paragraphs with specific actionable advice suitable for Indian farmers. Include specific product recommendations, timing, quantities where relevant. Keep language simple and practical.]\n\nDo not add any other text.`}]})
+    });
+    const data=await res.json();
+    const text=data.content?.[0]?.text||'';
+    const titleM=text.match(/TITLE:\s*(.+)/i);
+    const contentM=text.match(/CONTENT:\s*([\s\S]+)/i);
+    if(titleM)document.getElementById('ptitle').value=titleM[1].trim();
+    if(contentM)document.getElementById('pcontent').value=contentM[1].trim();
+    document.getElementById('pcat').value=cat;
+    document.getElementById('pemo').value='🌿';
+    toast('AI content generated! Review before publishing.');
+  } catch(e) { toast('AI error: '+(e.message||'Check your API key'),'err'); }
+  finally { document.getElementById('aisp').classList.remove('on'); }
+}
+
+function publishPost() {
+  const title=document.getElementById('ptitle').value.trim();
+  const content=document.getElementById('pcontent').value.trim();
+  if(!title||!content){toast('Fill in title and content','err');return;}
+  DB.push('posts',{title,content,category:document.getElementById('pcat').value,emoji:document.getElementById('pemo').value||'🌿',published:true});
+  toast('Post published successfully!');
+  clearPPost();loadPosts();
+}
+
+function loadPosts() {
+  const posts=DB.get('posts');
+  document.getElementById('postcnt').textContent=posts.length;
+  const el=document.getElementById('postslist');
+  if(!posts.length){el.innerHTML='<div class="emp" style="padding:24px"><div class="empi">✍️</div><div class="empp">No posts yet</div><div class="emps">Create your first advisory post</div></div>';return;}
+  el.innerHTML=posts.map(p=>`<div class="poc">
+    <div class="pot"><div style="font-size:18px;margin-right:8px">${p.emoji||'🌿'}</div><span class="bdg bg2">${p.category}</span></div>
+    <div class="pon">${p.title}</div>
+    <div class="pom">${fmtDate(p.ts)}</div>
+    <div class="pox">${(p.content||'').substring(0,160)}${(p.content||'').length>160?'...':''}</div>
+    <div style="margin-top:9px;display:flex;gap:6px">
+      <button class="btn br bsm" onclick="delPost('${p.id}')">Delete</button>
+    </div>
+  </div>`).join('');
+}
+function delPost(id){if(!confirm('Delete post?'))return;DB.del('posts',id);toast('Post deleted');loadPosts();}
+function clearPPost(){['ptitle','pcontent','pemo','aitopic'].forEach(id=>document.getElementById(id).value='');}
+
+// ========== COMMENTS ==========
+function loadComments() {
+  const cms=DB.get('comments');
+  const el=document.getElementById('cmlist');
+  if(!cms.length){el.innerHTML='<div class="emp"><div class="empi">🗨️</div><div class="empp">No comments</div><div class="emps">Product comments appear here for moderation</div></div>';return;}
+  const pending=cms.filter(c=>!c.approved).length;
+  const b=document.getElementById('bdg-comments');
+  b.textContent=pending;b.style.display=pending>0?'inline-block':'none';
+  el.innerHTML=cms.map(c=>`<div class="cmc">
+    <div class="cmt"><span class="cmn">${c.name||'Anonymous'} ${!c.approved?'<span class="bdg bn" style="font-size:9px">PENDING</span>':'<span class="bdg bg2" style="font-size:9px">APPROVED</span>'}</span><span style="font-size:11px;color:var(--ts)">${fmtDate(c.ts)}</span></div>
+    <div class="cmp">On: ${c.productName||'Unknown product'}</div>
+    <div class="cmx">${c.comment||''}</div>
+    <div style="display:flex;gap:6px">
+      ${!c.approved?`<button class="btn bg bsm" onclick="approveComment('${c.id}')">Approve</button>`:''}
+      <button class="btn br bsm" onclick="delComment('${c.id}')">Delete</button>
+    </div>
+  </div>`).join('');
+}
+function approveComment(id){DB.update('comments',id,{approved:true});toast('Comment approved!');loadComments();}
+function delComment(id){if(!confirm('Delete comment?'))return;DB.del('comments',id);toast('Deleted');loadComments();}
+</script>
+</body>
+</html>
